@@ -1,19 +1,18 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="StringBuilderExtensionTest.cs" company="N4Works">
-//   Apache License 2.0
+//     Apache License 2.0
 // </copyright>
 // <summary>
-//   Tests for string builder extension.
+// Tests for string builder extension.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace N4.Net.Extensions.Test
 {
-    using System.Text;
-
     using N4.Net.Extensions;
-
     using NUnit.Framework;
+    using System;
+    using System.Text;
 
     /// <summary>
     /// Tests for string builder extension.
@@ -21,6 +20,33 @@ namespace N4.Net.Extensions.Test
     [TestFixture(Category = "General", Description = "A set of tests for StringBuilder extension.")]
     public class StringBuilderExtensionTest
     {
+        /// <summary>
+        /// Test: Should add separator when second line is added.
+        /// </summary>
+        [Test(Description = "Should add a separator when second line is added.")]
+        public void ShouldAddSeparatorWhenSecondLineIsAdded()
+        {
+            var stringBuilder1 = new StringBuilder();
+            stringBuilder1.AppendLineWithSeparator("First line.", "_");
+            stringBuilder1.AppendLineWithSeparator("Second line.", "_");
+            Assert.AreEqual(string.Format("First line.{0}_Second line.{0}", Environment.NewLine), stringBuilder1.ToString());
+
+            var stringBuilder2 = new StringBuilder();
+            stringBuilder2.AppendLineWithSeparator("First line.", "_", 4);
+            stringBuilder2.AppendLineWithSeparator("Second line.", "_", 4);
+            Assert.AreEqual(string.Format("    First line.{0}    _Second line.{0}", Environment.NewLine), stringBuilder2.ToString());
+
+            var stringBuilder3 = new StringBuilder();
+            stringBuilder3.AppendLineWithSeparator("First line.", "_");
+            stringBuilder3.AppendLineWithSeparator("Second line.", "_", 4);
+            Assert.AreEqual(string.Format("First line.{0}    _Second line.{0}", Environment.NewLine), stringBuilder3.ToString());
+
+            var stringBuilder4 = new StringBuilder();
+            stringBuilder4.AppendLineWithSeparator("First line.", "_", 4);
+            stringBuilder4.AppendLineWithSeparator("Second line.", "_");
+            Assert.AreEqual(string.Format("    First line.{0}_Second line.{0}", Environment.NewLine), stringBuilder4.ToString());
+        }
+
         /// <summary>
         /// Test: Should ignore all blank lines when count method is called.
         /// </summary>
@@ -42,6 +68,21 @@ namespace N4.Net.Extensions.Test
         }
 
         /// <summary>
+        /// Test: Shouldn't add a separator when first line is added.
+        /// </summary>
+        [Test(Description = "Shouldn't add a separator when first line is added.")]
+        public void ShouldntAddSeparatorWhenFirstLineIsAdded()
+        {
+            var stringBuilder1 = new StringBuilder();
+            stringBuilder1.AppendLineWithSeparator("First line.", "_");
+            Assert.AreEqual(string.Format("First line.{0}", Environment.NewLine), stringBuilder1.ToString());
+
+            var stringBuilder2 = new StringBuilder();
+            stringBuilder2.AppendLineWithSeparator("First line.", "_", 4);
+            Assert.AreEqual(string.Format("    First line.{0}", Environment.NewLine), stringBuilder2.ToString());
+        }
+
+        /// <summary>
         /// Test: Shouldn't ignore blank lines when count method is called with false parameter.
         /// </summary>
         [Test(Description = "Shouldn't ignore blank lines when count method is called with false parameter.")]
@@ -58,7 +99,7 @@ namespace N4.Net.Extensions.Test
             stringBuilder.AppendLine();
             Assert.AreEqual(5, stringBuilder.LineCount(false));
             stringBuilder.AppendLine("Second line.");
-            Assert.AreEqual(6, stringBuilder.LineCount(false));            
+            Assert.AreEqual(6, stringBuilder.LineCount(false));
         }
     }
 }
