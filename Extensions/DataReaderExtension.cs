@@ -1,9 +1,9 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="DataReaderExtension.cs" company="N4Works">
-//   Apache License 2.0
+//     Apache License 2.0
 // </copyright>
 // <summary>
-//   The  extension.
+// The extension.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -11,6 +11,7 @@ namespace N4.Net.Extensions
 {
     using System;
     using System.Data;
+    using System.Diagnostics;
 
     /// <summary>
     /// The <see cref="IDataReader"/> extension.
@@ -34,29 +35,7 @@ namespace N4.Net.Extensions
         /// </returns>
         public static TType GetFieldValue<TType>(this IDataReader dataReader, int index)
         {
-            if (dataReader.IsDBNull(index))
-            {
-                return typeof(TType) == typeof(string) ? (dynamic)string.Empty : default(TType);
-            }
-
-            try
-            {
-                var retorno = dataReader[index];
-                if (typeof(TType) == typeof(string))
-                {
-                    retorno = dataReader[index].ToString().Trim();
-                }
-
-                return (TType)Convert.ChangeType(retorno, typeof(TType));
-            }
-            catch (IndexOutOfRangeException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                return default(TType);
-            }
+            return (TType)dataReader.GetFieldValue(typeof(TType), index);
         }
 
         /// <summary>
@@ -76,22 +55,42 @@ namespace N4.Net.Extensions
         /// </returns>
         public static object GetFieldValue(this IDataReader dataReader, Type type, string fieldName)
         {
-            if (dataReader[fieldName] == DBNull.Value)
+            return dataReader.GetFieldValue(type, dataReader.GetOrdinal(fieldName));
+        }
+
+        /// <summary>
+        /// Get the field value by name.
+        /// </summary>
+        /// <param name="dataReader">
+        /// The data reader.
+        /// </param>
+        /// <param name="type">
+        /// The type.
+        /// </param>
+        /// <param name="fieldIndex">
+        /// The field index.
+        /// </param>
+        /// <returns>
+        /// The field value.
+        /// </returns>
+        public static object GetFieldValue(this IDataReader dataReader, Type type, int fieldIndex)
+        {
+            if (dataReader.IsDBNull(fieldIndex))
             {
-                return type == typeof(string) ? string.Empty : GetDefaultValue(type);
+                return GetDefaultValue(type);
             }
 
             if (typeof(DateTime?) == type)
             {
-                throw new NotSupportedException(string.Format("The field {0} is of an unsupported type.", fieldName));
+                throw new NotSupportedException(string.Format("The type of field is unsupported."));
             }
 
             try
             {
-                var fieldValue = dataReader[fieldName];
+                var fieldValue = dataReader[fieldIndex];
                 if (type == typeof(string))
                 {
-                    fieldValue = dataReader[fieldName].ToString().Trim();
+                    fieldValue = dataReader[fieldIndex].ToString().Trim();
                 }
 
                 return Convert.ChangeType(fieldValue, type);
@@ -100,8 +99,10 @@ namespace N4.Net.Extensions
             {
                 throw;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                // If not a IndexOutOfRangeException, returns default value of type.
+                Debug.WriteLine(ex);
                 return GetDefaultValue(type);
             }
         }
@@ -137,6 +138,11 @@ namespace N4.Net.Extensions
         /// </returns>
         private static object GetDefaultValue(Type type)
         {
+            if (type == typeof(string))
+            {
+                return string.Empty;
+            }
+
             return type.IsValueType ? Activator.CreateInstance(type) : null;
         }
     }
