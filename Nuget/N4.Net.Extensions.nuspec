@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>N4.Net.Extensions</id>
+        <version>1.0.0</version>
+        <title>N4.Net.Extensions</title>
+        <authors>Bernardo Esbérard</authors>
+        <owners>N4Works</owners>
+        <projectUrl>https://github.com/bernardbr/n4.net.extensions.git</projectUrl>
+        <iconUrl>http://n4works.com/imagens/favicon.ico</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>A collection of useful type extensions provided by N4Works.com for .net</description>
+        <summary>A collection of useful type extensions provided by N4Works.com for .net</summary>
+        <tags>Extensions N4Works</tags>
+    </metadata>
+    <files>
+        <file src="..\Extensions\bin\Release\N4.Net.Extensions.dll" target="lib\net45\N4.Net.Extensions.dll" />
+        <file src="..\Extensions\bin\Release\N4.Net.Extensions.pdb" target="lib\net45\N4.Net.Extensions.pdb" />
+        <file src="..\Extensions\bin\Release\N4.Net.Extensions.XML" target="lib\net45\N4.Net.Extensions.XML" />
+    </files>
+</package>

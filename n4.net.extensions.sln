@@ -1,11 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N4.Net.Extensions", "Extensions\N4.Net.Extensions.csproj", "{3AAFC556-26D3-4E42-B3E7-83731F6C335B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N4.Net.Extensions.Test", "Extensions\Test\N4.Net.Extensions.Test.csproj", "{B7D9F4B8-5B91-4263-ABB9-8303985D5886}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A6A0DAAA-7B8E-4127-A3A4-6FFA79AA0161}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{D817D0A1-E2CB-442F-A31A-70582E9AD8D7}"
+	ProjectSection(SolutionItems) = preProject
+		Nuget\N4.Net.Extensions.nuspec = Nuget\N4.Net.Extensions.nuspec
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +31,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D817D0A1-E2CB-442F-A31A-70582E9AD8D7} = {A6A0DAAA-7B8E-4127-A3A4-6FFA79AA0161}
 	EndGlobalSection
 EndGlobal
