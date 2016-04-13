@@ -1,8 +1,10 @@
-version: 0.0.{build}
+version: '{branch}.0.{build}'
 configuration: Release
 environment:
   COVERALLS_REPO_TOKEN:
     secure: FEEztUbLLivMuzDkO1gD8ibKB3zAsOx8fH014epoCDsFgDD3dNrWw1yerYvG4IWg
+before_build:
+- cmd: nuget restore n4.net.extensions.sln
 build:
   project: n4.net.extensions.sln
   verbosity: normal
