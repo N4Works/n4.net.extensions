@@ -7,8 +7,8 @@ install:
   - nuget install coveralls.net -Version 0.412.0 -OutputDirectory coverage
   - sudo apt-get install gtk-sharp2
   - git clone --depth=50 git://github.com/csMACnz/monocov.git ../../bernardbr/monocov
-  - cd ./coverage/monocov
-  - cp ./tmp/Mono.Cecil.0.9.6.1/lib/net40/Mono.Cecil.dll 
+  - cd ../../bernardbr/monocov
+  - cp ../../bernardbr/tmp/Mono.Cecil.0.9.6.1/lib/net40/Mono.Cecil.dll 
   - ./configure
   - make
   - sudo make install
