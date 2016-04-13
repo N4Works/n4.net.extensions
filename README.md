@@ -1,5 +1,5 @@
 # n4.net.extensions
-<img align="right" width="256px" height="256px" src="http://n4works.com/imagens/favicon.ico">
+<a href="http://n4works.com" target="blank"><img align="right" width="256px" height="256px" src="http://n4works.com/imagens/favicon.ico"></a>
 
 
 [![Build Status](https://travis-ci.org/bernardbr/n4.net.extensions.svg?branch=master)](https://travis-ci.org/bernardbr/n4.net.extensions)
