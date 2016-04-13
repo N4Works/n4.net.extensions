@@ -3,6 +3,11 @@ solution: n4.net.extensions.sln
 install:
   - nuget restore n4.net.extensions.sln
   - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
+  - nuget install OpenCover -Version 4.6.519 -OutputDirectory coverage
+  - nuget install coveralls.net -Version 0.412.0 -OutputDirectory coverage
 script:
   - xbuild /p:Configuration=Release n4.net.extensions.sln
   - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./Extensions/Test/bin/Release/N4.Net.Extensions.Test.dll
+  - mono ./coverage/OpenCover.4.6.519\tools\OpenCover.Console.exe  -target: mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe -targetargs:"/nologo /noshadow ./Extensions/Test/bin/Release/N4.Net.Extensions.Test.dll" -filter:"+[*]* -[*.Test]*" -register:user
+  - mono ./coverage/coveralls.net.0.412/coverage/csmacnz.Coveralls.exe --opencover -i ./results.xml 
+  
