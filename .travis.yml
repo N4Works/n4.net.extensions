@@ -7,7 +7,7 @@ install:
   - nuget install coveralls.net -Version 0.412.0 -OutputDirectory coverage
   - sudo apt-get install gtk-sharp2
   - git clone --depth=50 git://github.com/csMACnz/monocov.git ./monocov
-  - cp ./tmp/Mono.Cecil.0.9.6.1/lib/net40/Mono.Cecil.dll ./monocov
+  - cp ./tmp/Mono.Cecil.0.9.6.1/lib/net45/Mono.Cecil.dll ./monocov
   - cd ./monocov
   - ./configure
   - make
@@ -16,9 +16,9 @@ install:
 script:
   - xbuild /p:Configuration=Release n4.net.extensions.sln
   - export LD_LIBRARY_PATH=/usr/local/lib
-  - mono --debug --profile=monocov:outfile=monocovCoverage.cov,+n4.net.extensions ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./Extensions/Test/bin/Release/N4.Net.Extensions.Test.dll
+  - mono --debug --profile=monocov:outfile=./monocovCoverage.cov,+n4.net.extensions ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./Extensions/Test/bin/Release/N4.Net.Extensions.Test.dll
   - cat monocovCoverage.cov
-  - ls monocovCoverage
+  - ls
   - REPO_COMMIT_AUTHOR=$(git show -s --pretty=format:"%cn")
   - REPO_COMMIT_AUTHOR_EMAIL=$(git show -s --pretty=format:"%ce")
   - REPO_COMMIT_MESSAGE=$(git show -s --pretty=format:"%s")
@@ -28,6 +28,6 @@ script:
   - echo $REPO_COMMIT_AUTHOR_EMAIL
   - echo $REPO_COMMIT_MESSAGE
   - echo $TRAVIS_JOB_ID  
-  - mono ./coverage/coveralls.net.0.412/tools/csmacnz.Coveralls.exe --monocov -i ./monocovCoverage --repoToken $COVERALLS_REPO_TOKEN --commitId $TRAVIS_COMMIT --commitBranch $TRAVIS_BRANCH --commitAuthor "$REPO_COMMIT_AUTHOR" --commitEmail "$REPO_COMMIT_AUTHOR_EMAIL" --commitMessage "$REPO_COMMIT_MESSAGE" --jobId $TRAVIS_JOB_ID  --serviceName travis-ci  --useRelativePaths
+  - mono ./coverage/coveralls.net.0.412/tools/csmacnz.Coveralls.exe --monocov -i ./monocovCoverage.cov --repoToken $COVERALLS_REPO_TOKEN --commitId $TRAVIS_COMMIT --commitBranch $TRAVIS_BRANCH --commitAuthor "$REPO_COMMIT_AUTHOR" --commitEmail "$REPO_COMMIT_AUTHOR_EMAIL" --commitMessage "$REPO_COMMIT_MESSAGE" --jobId $TRAVIS_JOB_ID  --serviceName travis-ci  --useRelativePaths
 
   
