@@ -1,0 +1,6 @@
+nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
+nuget install OpenCover -Version 4.6.519 -OutputDirectory coverage
+nuget install coveralls.net -Version 0.6.0 -OutputDirectory coverage
+ 
+.\coverage\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:.\testrunner\NUnit.Runners.2.6.4\tools\nunit-console.exe -targetargs:"/nologo /noshadow .\Extensions\Test\bin\Release\N4.Net.Extensions.Test.dll" -filter:"+[*]* -[*.Tests]*" -register:user
+.\coverage\coveralls.net.0.6.0\tools\csmacnz.Coveralls.exe --opencover -i .\results.xml 
