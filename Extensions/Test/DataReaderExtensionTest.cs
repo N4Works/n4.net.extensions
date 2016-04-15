@@ -23,19 +23,19 @@ namespace N4.Net.Extensions.Test
     public class DataReaderExtensionTest
     {
         /// <summary>
-        /// Should rethrow the exception when IndexOutOfRangeException was thrown.
+        /// Should be possible to check if value is dbnull through the field name.
         /// </summary>
         [Test]
-        public void ShouldRethrowTheExceptionWhenIndexOutOfRangeExceptionWasThrown()
+        public void ShouldBePossibleToCheckIfValueIsDBNullThroughTheFieldName()
         {
             var dataReaderMock = new Mock<IDataReader>(MockBehavior.Strict);
-            dataReaderMock.Setup(mock => mock.IsDBNull(It.IsAny<int>())).Returns(false).Verifiable();
-            dataReaderMock.Setup(mock => mock.GetOrdinal(It.IsAny<string>())).Returns(0).Verifiable();
-            dataReaderMock.Setup(mock => mock[It.IsAny<int>()]).Throws<IndexOutOfRangeException>().Verifiable();
-            dataReaderMock.Setup(mock => mock[It.IsAny<string>()]).Throws<IndexOutOfRangeException>().Verifiable();
+            dataReaderMock.Setup(mock => mock.IsDBNull(0)).Returns(true).Verifiable();
+            dataReaderMock.Setup(mock => mock.GetOrdinal("FieldNameDbNull")).Returns(0).Verifiable();
+            dataReaderMock.Setup(mock => mock.IsDBNull(1)).Returns(false).Verifiable();
+            dataReaderMock.Setup(mock => mock.GetOrdinal("FieldNameNotDbNull")).Returns(1).Verifiable();
 
-            Assert.Throws<IndexOutOfRangeException>(() => dataReaderMock.Object.GetFieldValue<string>(0));
-            Assert.Throws<IndexOutOfRangeException>(() => dataReaderMock.Object.GetFieldValue<string>("FieldName"));
+            Assert.IsTrue(dataReaderMock.Object.IsDBNull("FieldNameDbNull"));
+            Assert.IsFalse(dataReaderMock.Object.IsDBNull("FieldNameNotDbNull"));
         }
 
         /// <summary>
@@ -50,6 +50,22 @@ namespace N4.Net.Extensions.Test
 
             Assert.Throws<NotSupportedException>(() => dataReaderMock.Object.GetFieldValue<DateTime?>(0));
             Assert.Throws<NotSupportedException>(() => dataReaderMock.Object.GetFieldValue<DateTime?>("FieldName"));
+        }
+
+        /// <summary>
+        /// Should rethrow the exception when IndexOutOfRangeException was thrown.
+        /// </summary>
+        [Test]
+        public void ShouldRethrowTheExceptionWhenIndexOutOfRangeExceptionWasThrown()
+        {
+            var dataReaderMock = new Mock<IDataReader>(MockBehavior.Strict);
+            dataReaderMock.Setup(mock => mock.IsDBNull(It.IsAny<int>())).Returns(false).Verifiable();
+            dataReaderMock.Setup(mock => mock.GetOrdinal(It.IsAny<string>())).Returns(0).Verifiable();
+            dataReaderMock.Setup(mock => mock[It.IsAny<int>()]).Throws<IndexOutOfRangeException>().Verifiable();
+            dataReaderMock.Setup(mock => mock[It.IsAny<string>()]).Throws<IndexOutOfRangeException>().Verifiable();
+
+            Assert.Throws<IndexOutOfRangeException>(() => dataReaderMock.Object.GetFieldValue<string>(0));
+            Assert.Throws<IndexOutOfRangeException>(() => dataReaderMock.Object.GetFieldValue<string>("FieldName"));
         }
 
         /// <summary>

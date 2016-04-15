@@ -128,6 +128,26 @@ namespace N4.Net.Extensions
         }
 
         /// <summary>
+        /// Return whether the specified field is set to null.
+        /// </summary>
+        /// <param name="dataReader">
+        /// The data reader.
+        /// </param>
+        /// <param name="fieldName">
+        /// The field name.
+        /// </param>
+        /// <returns>
+        /// true if the specified field is set to null; otherwise, false.
+        /// </returns>
+        /// <exception cref="T:System.IndexOutOfRangeException">
+        /// The index passed was outside the range of 0 through <see cref="P:System.Data.IDataRecord.FieldCount"/>. 
+        /// </exception>
+        public static bool IsDBNull(this IDataReader dataReader, string fieldName)
+        {
+            return dataReader.IsDBNull(dataReader.GetOrdinal(fieldName));
+        }
+
+        /// <summary>
         /// The get default value.
         /// </summary>
         /// <param name="type">
