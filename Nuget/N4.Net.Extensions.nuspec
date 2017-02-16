@@ -2,9 +2,9 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>N4.Net.Extensions</id>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
         <title>N4.Net.Extensions</title>
-        <authors>Bernardo Esbérard</authors>
+        <authors>Bernardo Esbérard, Tiago Resende</authors>
         <owners>N4Works</owners>
         <projectUrl>https://github.com/bernardbr/n4.net.extensions.git</projectUrl>
         <iconUrl>http://n4works.com/imagens/favicon.ico</iconUrl>

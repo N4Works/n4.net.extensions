@@ -44,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataReaderExtensionTest.cs" />
+    <Compile Include="EnumExtensionTest.cs" />
+    <Compile Include="Mocks\EnumMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringBuilderExtensionTest.cs" />
   </ItemGroup>
@@ -56,6 +58,9 @@
       <Project>{3aafc556-26d3-4e42-b3e7-83731f6c335b}</Project>
       <Name>N4.Net.Extensions</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
