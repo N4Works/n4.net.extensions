@@ -1,3 +1,4 @@
+
 # n4.net.extensions
 <a href="http://n4works.com" target="blank"><img align="right" width="256px" height="256px" src="http://n4works.com/imagens/favicon.ico"></a>
 
@@ -21,4 +22,18 @@ using (var dataReader = ExecuteReader(command))
     
     return person;
 }
+```
+
+__*Enum extension:*__
+```csharp
+public enum GameTypes {
+    [EnumValue("Role Playing Game")]
+    RPG,
+    [EnumValue("First Person Shooter")]
+    FPS,
+    Action
+}
+```
+```csharp
+var typeDescription = GameTypes.RPG.GetValue();
 ```
