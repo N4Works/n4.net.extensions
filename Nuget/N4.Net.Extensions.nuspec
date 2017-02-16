@@ -6,7 +6,7 @@
         <title>N4.Net.Extensions</title>
         <authors>Bernardo Esbérard, Tiago Resende</authors>
         <owners>N4Works</owners>
-        <projectUrl>https://github.com/bernardbr/n4.net.extensions.git</projectUrl>
+        <projectUrl>https://github.com/n4works/n4.net.extensions.git</projectUrl>
         <iconUrl>http://n4works.com/imagens/favicon.ico</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>A collection of useful type extensions provided by N4Works.com for .net</description>

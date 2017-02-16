@@ -39,7 +39,7 @@
   <ItemGroup>
     <Compile Include="DataReaderExtension.cs" />
     <Compile Include="EnumExtension.cs" />
-    <Compile Include="EnumValue.cs" />
+    <Compile Include="EnumValueAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringBuilderExtension.cs" />
   </ItemGroup>
